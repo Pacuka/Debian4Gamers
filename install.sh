@@ -1,4 +1,4 @@
-#! /usr/bin/env bash
+#!/usr/bin/env bash
 
 ###############################################################################
 #                             Debian4Gamers                                   #
@@ -77,7 +77,7 @@ installFlatpak
 defaultGrubEnhanced
 
 InstallOptions=$(whiptail --separate-output --title "Installation Options" --checklist \
-  "Choose Installation Options" 20 70 12 \
+  "Choose Installation Options" 20 70 13 \  # Increased from 12 to 13 options
   "1" "Install Steam, Flatpak and Tools ( Highly Recommended )" ON \
   "2" "Install Extensions ( Recommended ) " ON \
   "3" "Install FlatHubApps ( Recommended ) " ON \
@@ -88,7 +88,8 @@ InstallOptions=$(whiptail --separate-output --title "Installation Options" --che
   "8" "Install DisplayLink Driver ( Extra ) " OFF \
   "9" "Install Visual Studio Code ( Extra ) " OFF \
   "10" "Install Nvidia GPU Drivers ( Experimental ) " OFF \
-  "11" "Disable Wayland ( Recommended for Gaming on Desktop ) " OFF 3>&1 1>&2 2>&3)
+  "11" "Enable Wayland ( Recommended for Gaming on Desktop )" OFF \  # Added Wayland option
+  "12" "Disable Wayland ( Recommended for Gaming on Desktop )" OFF 3>&1 1>&2 2>&3)
 
 if [ -z "$InstallOptions" ]; then
   echo "No option was selected (user hit Cancel or unselected all options)"
@@ -97,7 +98,6 @@ else
     echo $InstallOptions
     case "$Option" in
     "1")
-
       installSteamAndTools
       ;;
     "2")
@@ -128,7 +128,10 @@ else
       installGpuDrivers
       ;;
     "11")
-      disableWayland
+      enableWayland  # Function to enable Wayland
+      ;;
+    "12")
+      disableWayland  # Function to disable Wayland
       ;;
     *)
       echo "Unsupported item $Options!" >&2
