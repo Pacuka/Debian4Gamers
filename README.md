@@ -1,4 +1,4 @@
-# Debian4Gamers
+# Debian4Gamers -Add extras by Pacuka
 Optimize your gaming experience on Debian 12 GNOME with AMD, Nvidia(Experimental) and Intel GPUs using this simple and effective script.
 
 Example of Debian4Gamer full Script installed
